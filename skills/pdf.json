@@ -1,0 +1,7 @@
+{
+  "name": "PDF Generator",
+  "description": "Creates PDF documents using Python reportlab library",
+  "triggerKeywords": ["pdf", ".pdf", "create pdf", "generate pdf", "pdf document"],
+  "systemPromptFragment": "You can create PDF documents using Python. Use the run_command tool to execute a Python script that creates the PDF. The reportlab library is available. Example:\n\n```python\nfrom reportlab.lib.pagesizes import letter\nfrom reportlab.pdfgen import canvas\nfrom reportlab.lib.units import inch\n\nc = canvas.Canvas('output.pdf', pagesize=letter)\nc.setFont('Helvetica', 12)\nc.drawString(72, 720, 'Hello World')\nc.save()\n```\n\nFor more complex PDFs, use reportlab's platypus framework with Paragraphs, Tables, and Spacers for professional layouts.",
+  "tools": []
+}

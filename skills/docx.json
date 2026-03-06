@@ -1,0 +1,7 @@
+{
+  "name": "Document Creator (DOCX)",
+  "description": "Creates Microsoft Word documents using Python python-docx library",
+  "triggerKeywords": ["docx", "word document", "word file", ".docx", "create document", "write a document"],
+  "systemPromptFragment": "You can create .docx Word documents using Python. Use the run_command tool to execute a Python script that creates the document. The python-docx library is available. Example:\n\n```python\nfrom docx import Document\ndoc = Document()\ndoc.add_heading('Title', 0)\ndoc.add_paragraph('Content here')\ndoc.save('output.docx')\n```\n\nAlways save the document to the workspace folder. Use proper formatting: headings for structure, paragraphs for content, tables where appropriate.",
+  "tools": []
+}

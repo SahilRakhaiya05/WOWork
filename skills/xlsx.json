@@ -1,0 +1,7 @@
+{
+  "name": "Spreadsheet Creator (XLSX)",
+  "description": "Creates Excel spreadsheets using Python openpyxl library",
+  "triggerKeywords": ["xlsx", "excel", "spreadsheet", ".xlsx", "create spreadsheet", "create excel"],
+  "systemPromptFragment": "You can create .xlsx Excel spreadsheets using Python. Use the run_command tool to execute a Python script that creates the spreadsheet. The openpyxl library is available. Example:\n\n```python\nfrom openpyxl import Workbook\nfrom openpyxl.styles import Font, Alignment\n\nwb = Workbook()\nws = wb.active\nws.title = 'Sheet1'\nws['A1'] = 'Header'\nws['A1'].font = Font(bold=True)\nwb.save('output.xlsx')\n```\n\nUse proper headers, formatting, and formulas where appropriate.",
+  "tools": []
+}

@@ -1,0 +1,75 @@
+{
+  "name": "opencowork",
+  "version": "0.1.0",
+  "description": "Universal AI Desktop Work Agent — Claude-powered agent with universal search",
+  "main": "main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"vite\" \"wait-on http://localhost:5173 && electron .\"",
+    "build": "vite build && electron-builder",
+    "build:mac": "vite build && electron-builder --mac",
+    "build:win": "vite build && electron-builder --win",
+    "build:linux": "vite build && electron-builder --linux",
+    "postinstall": "node scripts/download-ripgrep.js",
+    "lint": "eslint src/ --ext .js,.jsx",
+    "start": "electron ."
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.39.0",
+    "@vscode/ripgrep": "^1.15.9",
+    "better-sqlite3": "^11.7.0",
+    "composio-core": "^0.5.0",
+    "dotenv": "^16.4.7",
+    "electron-updater": "^6.3.9",
+    "framer-motion": "^11.15.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "uuid": "^11.0.5"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/better-sqlite3": "^7.6.12",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^9.1.2",
+    "electron": "^33.3.1",
+    "electron-builder": "^25.1.8",
+    "eslint": "^9.17.0",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^4.0.0",
+    "vite": "^6.0.7",
+    "wait-on": "^8.0.3"
+  },
+  "build": {
+    "appId": "com.opencowork.app",
+    "productName": "OpenCowork",
+    "directories": {
+      "output": "dist-electron"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "dist/**/*",
+      "src/main/**/*",
+      "skills/**/*",
+      "node_modules/**/*"
+    ],
+    "mac": {
+      "target": ["dmg", "zip"],
+      "icon": "build/icon.icns"
+    },
+    "win": {
+      "target": ["nsis", "portable"],
+      "icon": "build/icon.ico"
+    },
+    "linux": {
+      "target": ["AppImage"],
+      "icon": "build/icon.png"
+    },
+    "publish": {
+      "provider": "github",
+      "owner": "opencowork",
+      "repo": "opencowork"
+    }
+  }
+}
