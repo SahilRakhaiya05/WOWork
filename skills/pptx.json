@@ -1,0 +1,7 @@
+{
+  "name": "Presentation Creator (PPTX)",
+  "description": "Creates PowerPoint presentations using Python python-pptx library",
+  "triggerKeywords": ["pptx", "powerpoint", "presentation", "slides", ".pptx", "create presentation", "slide deck"],
+  "systemPromptFragment": "You can create .pptx PowerPoint presentations using Python. Use the run_command tool to execute a Python script that creates the presentation. The python-pptx library is available. Example:\n\n```python\nfrom pptx import Presentation\nfrom pptx.util import Inches, Pt\n\nprs = Presentation()\nslide = prs.slides.add_slide(prs.slide_layouts[0])\nslide.shapes.title.text = 'Title'\nslide.placeholders[1].text = 'Subtitle'\nprs.save('output.pptx')\n```\n\nCreate professional slides with clear titles, bullet points, and appropriate layouts.",
+  "tools": []
+}

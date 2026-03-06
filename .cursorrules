@@ -1,0 +1,34 @@
+# OpenCowork Cursor Rules
+
+## Architecture
+- main process = Node.js only. renderer = React only. Bridge via ipcMain/ipcRenderer with contextBridge.
+- Never import Electron modules in renderer files. Never import renderer-only libs in main files.
+- All file system operations must go through src/main/tools/filesystem.js, never directly in agent.js.
+
+## Agent Loop
+- Always use streaming SDK calls. Never block the main thread waiting for Claude.
+- Tool calls that modify or delete files MUST have requiresConfirmation: true.
+- Always include the full conversation history in every SDK call for context continuity.
+- System prompt order: base instructions → global user instructions → folder instructions → active skills.
+
+## Search
+- Universal search workers must be fully independent — one worker failing should not block others.
+- ripgrep calls must include a 5-second timeout and a 500-result cap.
+- Search results must be deduplicated by content hash before being sent to renderer.
+- AI re-ranking call must use a separate low-max_tokens call (200 tokens), never the main agent context.
+
+## UI
+- All user-facing text is in /src/renderer/strings.js — no hardcoded strings in components.
+- Framer Motion variants are defined in /src/renderer/animations.js and imported, not inline.
+- The CommandPalette must close on Escape and on click-outside. Focus trap within the palette when open.
+- Confirmation dialogs must clearly state what action will occur and cannot be bypassed.
+
+## Database
+- All DB queries go through src/main/db.js — no raw SQL in other files.
+- Migrations are versioned in src/main/migrations/ and run automatically on startup.
+- FTS5 table is kept in sync via triggers on message insert/update/delete.
+
+## Security
+- Validate all paths passed to filesystem tools against the active workspace root. Reject any path traversal attempts (../).
+- Never log API keys. Sanitize error messages before sending to renderer.
+- Shell tool is sandboxed to the workspace folder as CWD and blocks a list of dangerous commands (rm -rf /, sudo, curl | sh, etc.).
